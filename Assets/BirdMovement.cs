@@ -53,7 +53,13 @@ public class BirdMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("Bird is colliding with the key");
-        SceneManager.LoadScene("Part2");
+        if (collider.gameObject.tag == "Finish")
+        {
+            SceneManager.LoadScene("Part2");
+        }
+        else
+        {
+            Debug.Log("Oh no, bird hit smog, health decreasing");
+        }
     }
 }
