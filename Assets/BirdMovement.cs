@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BirdMovement : MonoBehaviour
 {
@@ -50,4 +51,9 @@ public class BirdMovement : MonoBehaviour
         jumpPressed = false;
     }
 
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        Debug.Log("Bird is colliding with the key");
+        SceneManager.LoadScene("Part2");
+    }
 }
