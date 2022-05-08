@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class ButtonFunctions : MonoBehaviour
 {
     public GameObject Panel;
+    public GameObject MenuPanel;
     public GameObject scoreKeeper;
+    public bool pause = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,8 @@ public class ButtonFunctions : MonoBehaviour
 
     public void Home()
     {
+        PersistantData.Instance.Reset();
+        ToggleMenuPanel();
         SceneManager.LoadScene("Main");
     }
 
@@ -50,6 +54,24 @@ public class ButtonFunctions : MonoBehaviour
             // reset the score
             PersistantData.Instance.Reset();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    public void ToggleMenuPanel()
+    {
+        if (MenuPanel != null)
+        {
+            bool isActive = MenuPanel.activeSelf;
+            pause = !pause;
+            if (pause == true)
+            {
+                Time.timeScale = 0.0f;
+            }
+            else
+            {
+                Time.timeScale = 1.0f;
+            }
+            MenuPanel.SetActive(!isActive);
         }
     }
 }
