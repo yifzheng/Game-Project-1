@@ -45,5 +45,9 @@ public class PersistantData : MonoBehaviour
         return highScore;
     }
 
+    public void Reset()
+    {
+        highScore = 0;
+    }
 
 }

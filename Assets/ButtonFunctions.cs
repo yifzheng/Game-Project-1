@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class ButtonFunctions : MonoBehaviour
 {
     public GameObject Panel;
+    public GameObject scoreKeeper;
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (scoreKeeper == null)
+            scoreKeeper = GameObject.FindGameObjectWithTag("ScoreKeeper");
     }
 
     // Update is called once per frame
@@ -35,13 +37,14 @@ public class ButtonFunctions : MonoBehaviour
 
     public void Restart()
     {
-        if (Panel != null)
+        if (SceneManager.GetActiveScene().name == "Part1")
         {
-            bool isActive = Panel.activeSelf;
-            Panel.SetActive(!isActive);
+            Panel.SetActive(false);
+            // resume time
+            Time.timeScale = 1.0f;
+            // reset the score
+            PersistantData.Instance.Reset();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-        // resume time
-        Time.timeScale = 1.0f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

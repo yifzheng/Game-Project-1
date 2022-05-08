@@ -10,10 +10,12 @@ public class BirdMovement : MonoBehaviour
     [SerializeField] bool isFacingRight = true; // check if sprite is facing right
     [SerializeField] Rigidbody2D rigid; // rigid body
     [SerializeField] bool jumpPressed = false; // check if jump is pressed
-    [SerializeField] float jumpForce = 1000.0f;  // variable to store jump force
+    [SerializeField] float jumpForce = 1500.0f;  // variable to store jump force
     [SerializeField] Text healthTxt; // the text object displaying the health of the bird
     public GameObject Panel;
+    [SerializeField] GameObject scoreKeeper;
     int health; // the initial health of the bird 
+    const int scoreForLEvel = 100; // the maximum score for this level
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,10 @@ public class BirdMovement : MonoBehaviour
         if(rigid == null)
         {
             rigid = GetComponent<Rigidbody2D>();
+        }
+        if (scoreKeeper == null)
+        {
+            scoreKeeper = GameObject.FindGameObjectWithTag("ScoreKeeper");
         }
         health = 100;
         DisplayHealth();
@@ -62,6 +68,8 @@ public class BirdMovement : MonoBehaviour
     {
         if (collider.gameObject.tag == "Finish")
         {
+            int finalScore = scoreForLEvel * (health / 100); // score for level is 100 * the percentage of health / 100
+            scoreKeeper.GetComponent<ScoreKeeper>().UpdateScore(finalScore);
             SceneManager.LoadScene("Part2");
         }
         if (collider.gameObject.tag == "Smog")
@@ -72,13 +80,14 @@ public class BirdMovement : MonoBehaviour
 
     void DisplayHealth()
     {
-        healthTxt.text = "Health:" + health;
+        healthTxt.text = "Health: " + health;
     }
 
     // function to decrease health of the bird
     void LowerHealth()
     {
         health -= 10;
+        DisplayHealth();
         // if the health is <= 0, relaod scene and reset hp and score if available
         if (health <= 0)
         {
@@ -87,18 +96,10 @@ public class BirdMovement : MonoBehaviour
             // pause game
             Time.timeScale = 0.0f;
         }
-        else
-        {
-            DisplayHealth();
-        }
     }
     // toggle panel function
     public void TogglePanel()
     {
-        if (Panel != null)
-        {
-            bool isActive = Panel.activeSelf;
-            Panel.SetActive(!isActive);
-        }
+        Panel.SetActive(true);
     }
 }
