@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonFunctions : MonoBehaviour
 {
+    public GameObject Panel;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,5 +31,17 @@ public class ButtonFunctions : MonoBehaviour
     public void Home()
     {
         SceneManager.LoadScene("Main");
+    }
+
+    public void Restart()
+    {
+        if (Panel != null)
+        {
+            bool isActive = Panel.activeSelf;
+            Panel.SetActive(!isActive);
+        }
+        // resume time
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

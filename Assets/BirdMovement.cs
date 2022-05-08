@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class BirdMovement : MonoBehaviour
@@ -10,6 +11,10 @@ public class BirdMovement : MonoBehaviour
     [SerializeField] Rigidbody2D rigid; // rigid body
     [SerializeField] bool jumpPressed = false; // check if jump is pressed
     [SerializeField] float jumpForce = 1000.0f;  // variable to store jump force
+    [SerializeField] Text healthTxt; // the text object displaying the health of the bird
+    public GameObject Panel;
+    int health; // the initial health of the bird 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +22,8 @@ public class BirdMovement : MonoBehaviour
         {
             rigid = GetComponent<Rigidbody2D>();
         }
+        health = 100;
+        DisplayHealth();
     }
 
     // Update is called once per frame
@@ -57,9 +64,41 @@ public class BirdMovement : MonoBehaviour
         {
             SceneManager.LoadScene("Part2");
         }
+        if (collider.gameObject.tag == "Smog")
+        {
+            LowerHealth();
+        }
+    }
+
+    void DisplayHealth()
+    {
+        healthTxt.text = "Health:" + health;
+    }
+
+    // function to decrease health of the bird
+    void LowerHealth()
+    {
+        health -= 10;
+        // if the health is <= 0, relaod scene and reset hp and score if available
+        if (health <= 0)
+        {
+            // if health is 0, toggle panel and show gameover panel
+            TogglePanel();
+            // pause game
+            Time.timeScale = 0.0f;
+        }
         else
         {
-            Debug.Log("Oh no, bird hit smog, health decreasing");
+            DisplayHealth();
+        }
+    }
+    // toggle panel function
+    public void TogglePanel()
+    {
+        if (Panel != null)
+        {
+            bool isActive = Panel.activeSelf;
+            Panel.SetActive(!isActive);
         }
     }
 }
