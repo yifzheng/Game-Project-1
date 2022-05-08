@@ -35,6 +35,11 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene("Main");
     }
 
+    public void Settings()
+    {
+        SceneManager.LoadScene("Settings");
+    }
+
     public void Restart()
     {
         if (SceneManager.GetActiveScene().name == "Part1")
