@@ -12,11 +12,12 @@ public class BirdMovement : MonoBehaviour
     [SerializeField] bool jumpPressed = false; // check if jump is pressed
     [SerializeField] float jumpForce = 1500.0f;  // variable to store jump force
     [SerializeField] Text healthTxt; // the text object displaying the health of the bird
-    public GameObject Panel;
+    public GameObject Panel; // gameover panel
+    public GameObject InstructionsPanel; // instructions panel
     [SerializeField] GameObject scoreKeeper;
     int health; // the initial health of the bird 
     const int scoreForLEvel = 100; // the maximum score for this level
-
+    bool instruction = false; // boolean to pause game and open instruction panel
     // Start is called before the first frame update
     void Start()
     {
@@ -63,7 +64,7 @@ public class BirdMovement : MonoBehaviour
         rigid.AddForce(new Vector2(0, jumpForce));
         jumpPressed = false;
     }
-
+    // trigger collider
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Finish")
@@ -75,6 +76,15 @@ public class BirdMovement : MonoBehaviour
         if (collider.gameObject.tag == "Smog")
         {
             LowerHealth();
+        }
+    }
+
+    // actual collider
+    void OnCollisionEnter2D(Collision2D collider)
+    {
+        if (collider.gameObject.tag == "Platform")
+        {
+            ToggleInstructionPanel();
         }
     }
 
@@ -101,5 +111,25 @@ public class BirdMovement : MonoBehaviour
     public void TogglePanel()
     {
         Panel.SetActive(true);
+    }
+    // function to tooggle the instructions panel
+    public void ToggleInstructionPanel()
+    {
+        if (InstructionsPanel != null)
+        {
+            bool isActive = InstructionsPanel.activeSelf; // boolean to store active value
+            instruction = !instruction; // negate the value of instruction
+            if (instruction == true) 
+            {
+                // if instruction is true, pause game
+                Time.timeScale = 0.0f;
+            }
+            else
+            {
+                // else resume game
+                Time.timeScale = 1.0f;
+            }
+            InstructionsPanel.SetActive(!isActive); // toggle panel
+        }
     }
 }
