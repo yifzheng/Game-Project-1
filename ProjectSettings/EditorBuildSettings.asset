@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Part1.unity
     guid: dd6c704e7fcb94e4a8e49c3fedc7def2
   - enabled: 1
+    path: Assets/Scenes/Part1Facts.unity
+    guid: 0b523c2db3afb9b4faf8ff6aad725c40
+  - enabled: 1
     path: Assets/Scenes/Part2.unity
     guid: 9b3b949295f90d04d80499ea33c5e875
   - enabled: 1

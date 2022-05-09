@@ -18,6 +18,7 @@ public class BirdMovement : MonoBehaviour
     int health; // the initial health of the bird 
     const int scoreForLEvel = 100; // the maximum score for this level
     bool instruction = false; // boolean to pause game and open instruction panel
+    bool onLoad = true; // this boolean use to make sure instruction panel only loads once
     // Start is called before the first frame update
     void Start()
     {
@@ -84,7 +85,12 @@ public class BirdMovement : MonoBehaviour
     {
         if (collider.gameObject.tag == "Platform")
         {
-            ToggleInstructionPanel();
+            if (onLoad)
+            {
+                ToggleInstructionPanel();
+                onLoad = false;
+            }
+            
         }
     }
 
