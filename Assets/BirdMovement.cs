@@ -71,7 +71,7 @@ public class BirdMovement : MonoBehaviour
         {
             int finalScore = scoreForLEvel * (health / 100); // score for level is 100 * the percentage of health / 100
             scoreKeeper.GetComponent<ScoreKeeper>().UpdateScore(finalScore);
-            SceneManager.LoadScene("Part2");
+            SceneManager.LoadScene("Part1Facts");
         }
         if (collider.gameObject.tag == "Smog")
         {

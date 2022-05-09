@@ -8,6 +8,7 @@ public class ButtonFunctions : MonoBehaviour
     public GameObject Panel;
     public GameObject MenuPanel;
     public GameObject scoreKeeper;
+    public GameObject FactsPanel;
     public bool pause = false;
     // Start is called before the first frame update
     void Start()
@@ -73,5 +74,19 @@ public class ButtonFunctions : MonoBehaviour
             }
             MenuPanel.SetActive(!isActive);
         }
+    }
+
+    public void ToggleFactsPanel()
+    {
+        if (FactsPanel != null)
+        {
+            bool isActive = FactsPanel.activeSelf;
+            FactsPanel.SetActive(!isActive);
+        }
+    }
+
+    public void NextStage()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
