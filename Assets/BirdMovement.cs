@@ -15,9 +15,10 @@ public class BirdMovement : MonoBehaviour
     public GameObject Panel; // gameover panel
     public GameObject InstructionsPanel; // instructions panel
     [SerializeField] GameObject scoreKeeper;
+    [SerializeField] Animator animator;
     int health; // the initial health of the bird 
     const int scoreForLEvel = 100; // the maximum score for this level
-    bool instruction = false; // boolean to pause game and open instruction panel
+    [SerializeField] bool instruction = false; // boolean to pause game and open instruction panel
     bool onLoad = true; // this boolean use to make sure instruction panel only loads once
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,10 @@ public class BirdMovement : MonoBehaviour
         {
             scoreKeeper = GameObject.FindGameObjectWithTag("ScoreKeeper");
         }
+        if (animator == null)
+            animator = GetComponent<Animator>();
         health = 100;
+        animator.SetInteger("state", 0);
         DisplayHealth();
     }
 
@@ -90,7 +94,6 @@ public class BirdMovement : MonoBehaviour
                 ToggleInstructionPanel();
                 onLoad = false;
             }
-            
         }
     }
 
