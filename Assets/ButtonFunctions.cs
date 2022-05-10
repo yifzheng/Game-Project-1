@@ -8,6 +8,7 @@ public class ButtonFunctions : MonoBehaviour
     public GameObject Panel;
     public GameObject MenuPanel;
     public GameObject scoreKeeper;
+    public GameObject FactsPanel;
     public bool pause = false;
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,18 @@ public class ButtonFunctions : MonoBehaviour
         PersistantData.Instance.Reset();
         ToggleMenuPanel();
         SceneManager.LoadScene("Main");
+    }
+
+    public void HighScoreToHome()
+    {
+        PersistantData.Instance.Reset();
+        SceneManager.LoadScene("Main");
+    }
+
+    public void HighScores()
+    {
+        PlayerPrefs.SetInt("FromMenu", 1);
+        SceneManager.LoadScene("HighScores");
     }
 
     public void Settings()
@@ -73,5 +86,19 @@ public class ButtonFunctions : MonoBehaviour
             }
             MenuPanel.SetActive(!isActive);
         }
+    }
+
+    public void ToggleFactsPanel()
+    {
+        if (FactsPanel != null)
+        {
+            bool isActive = FactsPanel.activeSelf;
+            FactsPanel.SetActive(!isActive);
+        }
+    }
+
+    public void NextStage()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

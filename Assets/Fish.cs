@@ -25,6 +25,7 @@ public class Fish : MonoBehaviour
 		health-=damage;
 		if(health <=0){
 			Destroy(gameObject);
+            PersistantData.Instance.Reset(); // if health lower than 0, reset score and load to main
 			SceneManager.LoadScene("Main");
 		}
 	

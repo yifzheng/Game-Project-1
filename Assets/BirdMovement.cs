@@ -12,11 +12,13 @@ public class BirdMovement : MonoBehaviour
     [SerializeField] bool jumpPressed = false; // check if jump is pressed
     [SerializeField] float jumpForce = 1500.0f;  // variable to store jump force
     [SerializeField] Text healthTxt; // the text object displaying the health of the bird
-    public GameObject Panel;
+    public GameObject Panel; // gameover panel
+    public GameObject InstructionsPanel; // instructions panel
     [SerializeField] GameObject scoreKeeper;
-    int health; // the initial health of the bird 
-    const int scoreForLEvel = 100; // the maximum score for this level
-
+    [SerializeField] Animator animator;
+    int health; // the initial health of the bird as well as the score for the level
+    [SerializeField] bool instruction = false; // boolean to pause game and open instruction panel
+    bool onLoad = true; // this boolean use to make sure instruction panel only loads once
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +30,10 @@ public class BirdMovement : MonoBehaviour
         {
             scoreKeeper = GameObject.FindGameObjectWithTag("ScoreKeeper");
         }
+        if (animator == null)
+            animator = GetComponent<Animator>();
         health = 100;
+        animator.SetInteger("state", 0);
         DisplayHealth();
     }
 
@@ -63,18 +68,31 @@ public class BirdMovement : MonoBehaviour
         rigid.AddForce(new Vector2(0, jumpForce));
         jumpPressed = false;
     }
-
+    // trigger collider
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Finish")
         {
-            int finalScore = scoreForLEvel * (health / 100); // score for level is 100 * the percentage of health / 100
+            int finalScore = health; // score for level is 100 * the percentage of health / 100
             scoreKeeper.GetComponent<ScoreKeeper>().UpdateScore(finalScore);
-            SceneManager.LoadScene("Part2");
+            SceneManager.LoadScene("Part1Facts");
         }
         if (collider.gameObject.tag == "Smog")
         {
             LowerHealth();
+        }
+    }
+
+    // actual collider
+    void OnCollisionEnter2D(Collision2D collider)
+    {
+        if (collider.gameObject.tag == "Platform")
+        {
+            if (onLoad)
+            {
+                ToggleInstructionPanel();
+                onLoad = false;
+            }
         }
     }
 
@@ -101,5 +119,25 @@ public class BirdMovement : MonoBehaviour
     public void TogglePanel()
     {
         Panel.SetActive(true);
+    }
+    // function to tooggle the instructions panel
+    public void ToggleInstructionPanel()
+    {
+        if (InstructionsPanel != null)
+        {
+            bool isActive = InstructionsPanel.activeSelf; // boolean to store active value
+            instruction = !instruction; // negate the value of instruction
+            if (instruction == true) 
+            {
+                // if instruction is true, pause game
+                Time.timeScale = 0.0f;
+            }
+            else
+            {
+                // else resume game
+                Time.timeScale = 1.0f;
+            }
+            InstructionsPanel.SetActive(!isActive); // toggle panel
+        }
     }
 }
