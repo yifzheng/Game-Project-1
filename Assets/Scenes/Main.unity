@@ -1445,7 +1445,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Nature's Triathalon
+  m_Text: Nature's Duathalon
 --- !u!222 &1904658932
 CanvasRenderer:
   m_ObjectHideFlags: 0

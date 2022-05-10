@@ -75,7 +75,6 @@ public class BirdMovement : MonoBehaviour
         if (collider.gameObject.tag == "Finish")
         {
             int finalScore = health  * pointMuliplier; // score for level is 100 * the percentage of health / 100
-            Debug.Log(finalScore);
             scoreKeeper.GetComponent<ScoreKeeper>().UpdateScore(finalScore);
             SceneManager.LoadScene("Part1Facts");
         }
