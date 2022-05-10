@@ -16,8 +16,7 @@ public class BirdMovement : MonoBehaviour
     public GameObject InstructionsPanel; // instructions panel
     [SerializeField] GameObject scoreKeeper;
     [SerializeField] Animator animator;
-    int health; // the initial health of the bird 
-    const int scoreForLEvel = 100; // the maximum score for this level
+    int health; // the initial health of the bird as well as the score for the level
     [SerializeField] bool instruction = false; // boolean to pause game and open instruction panel
     bool onLoad = true; // this boolean use to make sure instruction panel only loads once
     // Start is called before the first frame update
@@ -74,7 +73,7 @@ public class BirdMovement : MonoBehaviour
     {
         if (collider.gameObject.tag == "Finish")
         {
-            int finalScore = scoreForLEvel * (health / 100); // score for level is 100 * the percentage of health / 100
+            int finalScore = health; // score for level is 100 * the percentage of health / 100
             scoreKeeper.GetComponent<ScoreKeeper>().UpdateScore(finalScore);
             SceneManager.LoadScene("Part1Facts");
         }

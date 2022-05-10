@@ -40,6 +40,18 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene("Main");
     }
 
+    public void HighScoreToHome()
+    {
+        PersistantData.Instance.Reset();
+        SceneManager.LoadScene("Main");
+    }
+
+    public void HighScores()
+    {
+        PlayerPrefs.SetInt("FromMenu", 1);
+        SceneManager.LoadScene("HighScores");
+    }
+
     public void Settings()
     {
         SceneManager.LoadScene("Settings");
@@ -87,6 +99,6 @@ public class ButtonFunctions : MonoBehaviour
 
     public void NextStage()
     {
-        SceneManager.LoadScene("Part3");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

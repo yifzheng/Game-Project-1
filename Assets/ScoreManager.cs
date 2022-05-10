@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -10,9 +11,8 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        /* var json = PlayerPrefs.GetString("scores", "{}");
-        sd = JsonUtility.FromJson<ScoreData>(json); */
-        sd = new ScoreData();
+        var json = PlayerPrefs.GetString("scores", "{}");
+        sd = JsonUtility.FromJson<ScoreData>(json);
     }
     // get highscores in descending order
     public IEnumerable<Score> GetHighScores()
@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour
         sd.scores.Clear();
     }
 
-    /* private void OnDestroy()
+    private void OnDestroy()
     {
         SaveScore();
     }
@@ -39,5 +39,6 @@ public class ScoreManager : MonoBehaviour
     {
         var json = JsonUtility.ToJson(sd);
         PlayerPrefs.SetString("scores", json);
-    } */
+    }
+
 }
