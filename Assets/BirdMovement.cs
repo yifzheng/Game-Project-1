@@ -19,6 +19,7 @@ public class BirdMovement : MonoBehaviour
     int health; // the initial health of the bird as well as the score for the level
     [SerializeField] bool instruction = false; // boolean to pause game and open instruction panel
     bool onLoad = true; // this boolean use to make sure instruction panel only loads once
+    int pointMuliplier = 1; // the muliplier for points in the level
     // Start is called before the first frame update
     void Start()
     {
@@ -73,7 +74,8 @@ public class BirdMovement : MonoBehaviour
     {
         if (collider.gameObject.tag == "Finish")
         {
-            int finalScore = health; // score for level is 100 * the percentage of health / 100
+            int finalScore = health  * pointMuliplier; // score for level is 100 * the percentage of health / 100
+            Debug.Log(finalScore);
             scoreKeeper.GetComponent<ScoreKeeper>().UpdateScore(finalScore);
             SceneManager.LoadScene("Part1Facts");
         }
@@ -93,6 +95,10 @@ public class BirdMovement : MonoBehaviour
                 ToggleInstructionPanel();
                 onLoad = false;
             }
+        }
+        if (collider.gameObject.tag == "Coin")
+        {
+            pointMuliplier++; // if bird its coin increment the multliplier
         }
     }
 
