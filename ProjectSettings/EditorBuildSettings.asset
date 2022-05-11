@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Part3.unity
     guid: 440914e03ba835d43a853be9e18105e0
+  - enabled: 1
+    path: Assets/Scenes/WaterInfo.unity
+    guid: e978ae8ffc937455cbdc352947e2fe3c
   m_configObjects: {}
