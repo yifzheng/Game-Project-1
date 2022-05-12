@@ -10,9 +10,7 @@ public class dropCans : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.x));
-		StartCoroutine(littering());
-		StartCoroutine(littering());
+		screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.x));   
 		StartCoroutine(littering());
 		StartCoroutine(littering());
     }
@@ -21,22 +19,22 @@ public class dropCans : MonoBehaviour
 	private void spawnCan(){
 		GameObject a = Instantiate(canPrefab) as GameObject;
 		a.transform.position=new Vector2(Random.Range(-screenBounds.x,screenBounds.x), Random.Range(screenBounds.y,screenBounds.y));
-
-
-
+		
+	
+	
 	}
 	IEnumerator littering(){
 		while(true){
-			yield return new WaitForSeconds(Random.Range(1f,4f));
+			yield return new WaitForSeconds(Random.Range(1f,3f));
 			spawnCan();
-
-
-
+			
+			
+			
 		}
 	}
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 }
