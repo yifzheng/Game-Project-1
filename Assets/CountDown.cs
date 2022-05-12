@@ -9,7 +9,7 @@ public class CountDown : MonoBehaviour
     [SerializeField] float timer=60;
     [SerializeField] Text timerTxt;
     // Start is called before the first frame update
-    /* void Start()
+     void Start()
     {
         DisplayTimer();
     }
@@ -26,5 +26,5 @@ public class CountDown : MonoBehaviour
     public void DisplayTimer(){
         timerTxt.text="Timer "+(int)timer;
 
-    } */
+    }
 }
