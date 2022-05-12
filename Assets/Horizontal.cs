@@ -4,17 +4,5 @@ using UnityEngine;
 
 public class Horizontal : MonoBehaviour
 {
-    [SerializeField] GameObject smog;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

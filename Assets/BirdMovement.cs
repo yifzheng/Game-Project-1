@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class BirdMovement : MonoBehaviour
@@ -9,7 +10,16 @@ public class BirdMovement : MonoBehaviour
     [SerializeField] bool isFacingRight = true; // check if sprite is facing right
     [SerializeField] Rigidbody2D rigid; // rigid body
     [SerializeField] bool jumpPressed = false; // check if jump is pressed
-    [SerializeField] float jumpForce = 1000.0f;  // variable to store jump force
+    [SerializeField] float jumpForce = 1500.0f;  // variable to store jump force
+    [SerializeField] Text healthTxt; // the text object displaying the health of the bird
+    public GameObject Panel; // gameover panel
+    public GameObject InstructionsPanel; // instructions panel
+    [SerializeField] GameObject scoreKeeper;
+    [SerializeField] Animator animator;
+    int health; // the initial health of the bird as well as the score for the level
+    [SerializeField] bool instruction = false; // boolean to pause game and open instruction panel
+    bool onLoad = true; // this boolean use to make sure instruction panel only loads once
+    int pointMuliplier = 1; // the muliplier for points in the level
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +27,15 @@ public class BirdMovement : MonoBehaviour
         {
             rigid = GetComponent<Rigidbody2D>();
         }
+        if (scoreKeeper == null)
+        {
+            scoreKeeper = GameObject.FindGameObjectWithTag("ScoreKeeper");
+        }
+        if (animator == null)
+            animator = GetComponent<Animator>();
+        health = 100;
+        animator.SetInteger("state", 0);
+        DisplayHealth();
     }
 
     // Update is called once per frame
@@ -50,16 +69,80 @@ public class BirdMovement : MonoBehaviour
         rigid.AddForce(new Vector2(0, jumpForce));
         jumpPressed = false;
     }
-
+    // trigger collider
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Finish")
         {
-            SceneManager.LoadScene("Part2");
+            int finalScore = health  * pointMuliplier; // score for level is 100 * the percentage of health / 100
+            scoreKeeper.GetComponent<ScoreKeeper>().UpdateScore(finalScore);
+            SceneManager.LoadScene("Part1Facts");
         }
-        else
+        if (collider.gameObject.tag == "Smog")
         {
-            Debug.Log("Oh no, bird hit smog, health decreasing");
+            LowerHealth();
+        }
+    }
+
+    // actual collider
+    void OnCollisionEnter2D(Collision2D collider)
+    {
+        if (collider.gameObject.tag == "Platform")
+        {
+            if (onLoad)
+            {
+                ToggleInstructionPanel();
+                onLoad = false;
+            }
+        }
+        if (collider.gameObject.tag == "Coin")
+        {
+            pointMuliplier++; // if bird its coin increment the multliplier
+        }
+    }
+
+    void DisplayHealth()
+    {
+        healthTxt.text = "Health: " + health;
+    }
+
+    // function to decrease health of the bird
+    void LowerHealth()
+    {
+        health -= 10;
+        DisplayHealth();
+        // if the health is <= 0, relaod scene and reset hp and score if available
+        if (health <= 0)
+        {
+            // if health is 0, toggle panel and show gameover panel
+            TogglePanel();
+            // pause game
+            Time.timeScale = 0.0f;
+        }
+    }
+    // toggle panel function
+    public void TogglePanel()
+    {
+        Panel.SetActive(true);
+    }
+    // function to tooggle the instructions panel
+    public void ToggleInstructionPanel()
+    {
+        if (InstructionsPanel != null)
+        {
+            bool isActive = InstructionsPanel.activeSelf; // boolean to store active value
+            instruction = !instruction; // negate the value of instruction
+            if (instruction == true) 
+            {
+                // if instruction is true, pause game
+                Time.timeScale = 0.0f;
+            }
+            else
+            {
+                // else resume game
+                Time.timeScale = 1.0f;
+            }
+            InstructionsPanel.SetActive(!isActive); // toggle panel
         }
     }
 }
