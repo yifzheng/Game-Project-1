@@ -68,6 +68,13 @@ public class ButtonFunctions : MonoBehaviour
             PersistantData.Instance.Reset();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+        if (SceneManager.GetActiveScene().name == "Part3")
+        {
+            Panel.SetActive(false);
+            Time.timeScale = 1.0f;
+            PersistantData.Instance.SetScore(PlayerPrefs.GetInt("Part1Score")); // if health lower than 0, reset score to score in part1 and reload the scene
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     public void ToggleMenuPanel()

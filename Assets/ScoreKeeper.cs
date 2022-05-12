@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ScoreKeeper : MonoBehaviour
 {
@@ -25,12 +26,15 @@ public class ScoreKeeper : MonoBehaviour
         We take the paramter and set it to score and call DisplayScore() to update the text
         Afterwards, call PerstantData and use IncrementScore() to update the highscore
         PlayerPrefs is created so we have a reference of the score in the next round should there be a gameover/reset
+        <---------------------------------------------------------------->
+        In part3, update score calls persistantdata and score is equal to playerprefs.getInt("Part1Score")
+        When timer hits 0, score will be updated and scene will load next
     */
     public void UpdateScore(int sc)
     {
         score += sc;
         DisplayScore();
         PersistantData.Instance.IncrementScore(sc); // have persistant data update the score
-        PlayerPrefs.SetInt("Part1Score", sc); // save the level score in playerprefs, will delete at highscore page
+        PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "Score", sc); // save the level score in playerprefs, will delete at highscore page
     }
 }
