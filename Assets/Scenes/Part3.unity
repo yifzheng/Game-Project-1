@@ -2461,6 +2461,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 60
   timerTxt: {fileID: 890936495}
+  controller: {fileID: 475219088}
+  Healthcontroller: {fileID: 2069332503}
 --- !u!1 &2069332503 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4523269129992819276, guid: 15e323e13e4782440b55fea0e7401bae, type: 3}

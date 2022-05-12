@@ -18,29 +18,30 @@ public class Fish : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void DisplayHealth()
     {
         fishHP.text = "Health: " + health;
     }
-	
+
     // toggle panel function
     public void TogglePanel()
     {
         gameOverPanel.SetActive(true);
     }
-	
+
 	public void TakeDamage(int damage){
-	
+
 		health-=damage;
+    
         DisplayHealth();
 		if(health <=0){
             TogglePanel();
             Time.timeScale = 0.0f;
 		}
-	
-	
+
+
 	}
 }
