@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ScoreKeeper : MonoBehaviour
 {
@@ -31,6 +32,6 @@ public class ScoreKeeper : MonoBehaviour
         score += sc;
         DisplayScore();
         PersistantData.Instance.IncrementScore(sc); // have persistant data update the score
-        PlayerPrefs.SetInt("Part1Score", sc); // save the level score in playerprefs, will delete at highscore page
+        PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "Score", sc); // save the level score in playerprefs, will delete at highscore page
     }
 }
