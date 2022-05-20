@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 100}
+  m_AnchoredPosition: {x: 0, y: 75}
   m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &164021516
@@ -519,7 +519,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 900, y: 30}
+  m_SizeDelta: {x: 1200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &611380345
 MonoBehaviour:
@@ -543,10 +543,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 28
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -554,19 +554,23 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'The burden of air pollution tends to be greater across both low and middle
-    income countries for two reasons: indoor pollution rates tend to be high in low-income
-    countries due to a reliance on solid fuels for cooking; and outdoor air pollution
-    tends to increase as countries industrialize and shift from low-to-middle incomes.
-
-    These
-    pollutants cause air inflammation, rupturing of blood vessels, and lung failure.
-    As birds are often at high altitudes, they have more contact with these pollutants
-    Studies have shown that long-term exposure to polycyclic aromatic hydrocarbons
-    (PAHs), toxic chemicals commonly emitted by traffic, may cause reduced egg production
-    and hatching, increased clutch or brood abandonment, and reduced growth in birds.
-    A study in Spain found that blackbirds exposed to long-term air pollution were
-    found to have significantly lower body weights.'
+  m_Text: "Air pollution is one of the leading risk factors for death. But its impacts
+    go even further, also being one of the main contributors to global disease burden.
+    The burden is measured in Disability-Adjusted Life Years (DALY). One DALY is
+    the equivalent of losing one year\r in good health because of either premature
+    mortality or disability. In 2019, the Disease Burden By Risk Factor for Air-pollution
+    was 213 Million.\nThe burden of air pollution tends to be greater across both
+    low and middle income countries for two reasons: indoor pollution rates tend
+    to be high in low-income countries due to a reliance on solid fuels for cooking;
+    and outdoor air pollution tends to increase as countries industrialize and shift
+    from low-to-middle incomes.\nThese pollutants cause air inflammation, rupturing
+    of blood vessels, and lung failure. As birds are often at high altitudes, they
+    have more contact with these pollutants Studies have shown that long-term exposure
+    to polycyclic aromatic hydrocarbons (PAHs), toxic chemicals commonly emitted
+    by traffic, may cause reduced egg production and hatching, increased clutch or
+    brood abandonment, and reduced growth in birds. A study in Spain found that blackbirds
+    exposed to long-term air pollution were found to have significantly lower body
+    weights."
 --- !u!222 &611380346
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -634,7 +638,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 28
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -646,18 +650,13 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "In 2016, the World Health Organization estimated 3 million people die
-    annually from air pollution-related illnesses. \n\u201CThe health of migratory
+    annually from air pollution-related illnesses. \n\n\u201CThe health of migratory
     birds is only as good as the worst place they spent time during their full annual
     cycle,\u201D David Mehlman, director of the Migratory Bird Program at the Nature
-    Conservancy. \nThe criteria pollutants are carbon monoxide (CO), lead (Pb), nitrogen
-    dioxide(NO2), ozone (O3), particulate matter (PM), and sulfur dioxide (SO2).\nGlobally,
-    air pollution contributed to 11.64692768558896% of deaths in 2019.\nAir pollution
-    is one of the leading risk factors for death. But its impacts go even further,
-    also being one of the main contributors to global disease burden. The burden
-    is measured in Disability-Adjusted Life Years (DALY). One DALY is the equivalent
-    of losing one year\r in good health because of either premature mortality or
-    disability. In 2019, the Disease Burden By Risk Factor for Air-pollution was
-    213 Million."
+    Conservancy. \n\nThe criteria pollutants are carbon monoxide (CO), lead (Pb),
+    nitrogen dioxide(NO2), ozone (O3), particulate matter (PM), and sulfur dioxide
+    (SO2).\n\nGlobally, air pollution contributed to 11.64692768558896% of deaths
+    in 2019."
 --- !u!222 &803850302
 CanvasRenderer:
   m_ObjectHideFlags: 0
