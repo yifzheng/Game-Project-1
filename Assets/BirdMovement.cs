@@ -10,7 +10,7 @@ public class BirdMovement : MonoBehaviour
     [SerializeField] bool isFacingRight = true; // check if sprite is facing right
     [SerializeField] Rigidbody2D rigid; // rigid body
     [SerializeField] bool jumpPressed = false; // check if jump is pressed
-    [SerializeField] float jumpForce = 1500.0f;  // variable to store jump force
+    [SerializeField] float jumpForce = 2250.0f;  // variable to store jump force
     [SerializeField] Text healthTxt; // the text object displaying the health of the bird
     public GameObject Panel; // gameover panel
     public GameObject InstructionsPanel; // instructions panel
@@ -20,6 +20,8 @@ public class BirdMovement : MonoBehaviour
     [SerializeField] bool instruction = false; // boolean to pause game and open instruction panel
     bool onLoad = true; // this boolean use to make sure instruction panel only loads once
     int pointMuliplier = 1; // the muliplier for points in the level
+    int keyCount = 0; // variable holding the count of keys aquired
+    const int KEYS = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +52,7 @@ public class BirdMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rigid.velocity = new Vector2(movement * 1, 0);
+        rigid.velocity = new Vector2(movement * 1.75f, 0);
         if (movement < 0 && isFacingRight || movement > 0 && !isFacingRight)
             Flip();
         if (jumpPressed)
@@ -74,9 +76,13 @@ public class BirdMovement : MonoBehaviour
     {
         if (collider.gameObject.tag == "Finish")
         {
-            int finalScore = health  * pointMuliplier; // score for level is 100 * the percentage of health / 100
-            scoreKeeper.GetComponent<ScoreKeeper>().UpdateScore(finalScore);
-            SceneManager.LoadScene("Part1Facts");
+            keyCount++;
+            if (keyCount == KEYS)
+            {
+                int finalScore = health  * pointMuliplier; // score for level is 100 * the percentage of health / 100
+                scoreKeeper.GetComponent<ScoreKeeper>().UpdateScore(finalScore);
+                SceneManager.LoadScene("Part1Facts");
+            }
         }
         if (collider.gameObject.tag == "Smog")
         {
