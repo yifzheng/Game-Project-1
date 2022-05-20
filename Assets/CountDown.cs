@@ -30,13 +30,14 @@ public class CountDown : MonoBehaviour
         if(timer<=0){
 
           score=Healthcontroller.GetComponent<Fish>().health*10;
-          Debug.Log(score);
+        //  Debug.Log(score);
           controller.GetComponent<ScoreKeeper>().UpdateScore(score);
-          SceneManager.LoadScene("EnterPlayerName");
+          SceneManager.LoadScene("WaterInfo");
         }
     }
     public void DisplayTimer(){
         timerTxt.text="Timer "+(int)timer;
 
     }
+  
 }
